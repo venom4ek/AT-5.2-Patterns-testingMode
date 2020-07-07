@@ -33,7 +33,7 @@ public class AuthorizationTest {
     void shouldSubmitWhenInvalidUser() {
         RegistrationDto user = GeneratorData.genInvalidLogin();
         open("http://localhost:9999");
-        $("[data-test-id=login] input").sendKeys("nameuser");
+        $("[data-test-id=login] input").sendKeys(user.getLogin());
         $("[data-test-id=password] input").sendKeys(user.getPassword());
         $("[data-test-id=action-login]").click();
         $(byText("Неверно указан логин или пароль")).waitUntil(visible, 5000);
@@ -44,7 +44,7 @@ public class AuthorizationTest {
         RegistrationDto user = GeneratorData.genBadPassword();
         open("http://localhost:9999");
         $("[data-test-id=login] input").sendKeys(user.getLogin());
-        $("[data-test-id=password] input").sendKeys("jrjkdfy387yu");
+        $("[data-test-id=password] input").sendKeys(user.getPassword());
         $("[data-test-id=action-login]").click();
         $(byText("Неверно указан логин или пароль")).waitUntil(visible, 5000);
     }

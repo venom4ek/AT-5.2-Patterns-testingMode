@@ -55,24 +55,26 @@ public class GeneratorData {
 
     public static RegistrationDto genInvalidLogin() {
         Faker faker = new Faker(new Locale("en"));
+        String password = faker.internet().password();
         RegistrationDto invalidLogin = new RegistrationDto(
                 "username",
-                faker.internet().password(),
+                password,
                 "active"
         );
         RegUser(invalidLogin);
-        return invalidLogin;
+        return new RegistrationDto("badLogin", password, "active");
     }
 
     public static RegistrationDto genBadPassword() {
         Faker faker = new Faker(new Locale("en"));
+        String userName = faker.name().username().toLowerCase();
         RegistrationDto badPassword = new RegistrationDto(
-                faker.name().username().toLowerCase(),
-                "badpassword",
+                userName,
+                "correctPassword",
                 "active"
         );
         RegUser(badPassword);
-        return badPassword;
+        return new RegistrationDto(userName, "badPassword", "active");
     }
 
 
